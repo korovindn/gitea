@@ -138,6 +138,7 @@ func NewMainApp(version, versionExtra string) *cli.App {
 		CmdDumpRepository,
 		CmdRestoreRepository,
 		CmdActions,
+		CmdPages,
 	}
 
 	// these sub-commands do not need the config file, and they do not depend on any path or environment variable.
