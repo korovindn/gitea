@@ -1239,6 +1239,8 @@ func Routes() *web.Route {
 					m.Get("/tags/{sha}", repo.GetAnnotatedTag)
 					m.Get("/notes/{sha}", repo.GetNote)
 				}, context.ReferencesGitRepo(true), reqRepoReader(unit.TypeCode))
+				m.Get("/compare/*", context.ReferencesGitRepo(true), reqRepoReader(unit.TypeCode), repo.Compare)
+				m.Get("/comparediff/*", context.ReferencesGitRepo(true), reqRepoReader(unit.TypeCode), repo.DownloadCompareDiffOrPatch)
 				m.Post("/diffpatch", reqRepoWriter(unit.TypeCode), reqToken(), bind(api.ApplyDiffPatchFileOptions{}), mustNotBeArchived, repo.ApplyDiffPatch)
 				m.Group("/contents", func() {
 					m.Get("", repo.GetContentsList)
